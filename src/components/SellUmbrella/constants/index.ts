@@ -1,0 +1,1 @@
+export const RAIN_PURCHASE_ASSUMPTION = 50;
