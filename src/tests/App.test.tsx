@@ -19,65 +19,65 @@ describe('Test App Component', () => {
     response = {
       data: {
         location: {
-          name: 'Jakarta',
-          region: 'Jakarta Raya',
-          country: 'Indonesia',
-          lat: -6.21,
-          lon: 106.85,
-          tz_id: 'Asia/Jakarta',
-          localtime_epoch: 1663523662,
-          localtime: '2022-09-19 0:54',
+          name: 'Dublin',
+          region: 'Dublin',
+          country: 'Ireland',
+          lat: 53.33,
+          lon: -6.25,
+          tz_id: 'Europe/Dublin',
+          localtime_epoch: 1663849252,
+          localtime: '2022-09-22 13:20',
         },
         forecast: {
           forecastday: [
             {
-              date: '2022-09-19',
-              date_epoch: 1663545600,
+              date: '2022-09-22',
+              date_epoch: 1663804800,
               day: {
-                maxtemp_c: 34.6,
-                maxtemp_f: 94.3,
-                mintemp_c: 26.3,
-                mintemp_f: 79.3,
-                avgtemp_c: 29.4,
-                avgtemp_f: 84.9,
-                maxwind_mph: 12.3,
-                maxwind_kph: 19.8,
-                totalprecip_mm: 4.5,
-                totalprecip_in: 0.18,
-                avgvis_km: 9.9,
-                avgvis_miles: 6.0,
-                avghumidity: 62.0,
+                maxtemp_c: 15.1,
+                maxtemp_f: 59.2,
+                mintemp_c: 10.1,
+                mintemp_f: 50.2,
+                avgtemp_c: 13.7,
+                avgtemp_f: 56.7,
+                maxwind_mph: 11.4,
+                maxwind_kph: 18.4,
+                totalprecip_mm: 21.5,
+                totalprecip_in: 0.85,
+                avgvis_km: 9.0,
+                avgvis_miles: 5.0,
+                avghumidity: 90.0,
                 daily_will_it_rain: 1,
-                daily_chance_of_rain: 88,
+                daily_chance_of_rain: 98,
                 daily_will_it_snow: 0,
                 daily_chance_of_snow: 0,
                 condition: {
-                  text: 'Patchy rain possible',
-                  icon: '//cdn.weatherapi.com/weather/64x64/day/176.png',
-                  code: 1063,
+                  text: 'Heavy rain',
+                  icon: '//cdn.weatherapi.com/weather/64x64/day/308.png',
+                  code: 1195,
                 },
-                uv: 6.0,
+                uv: 3.0,
               },
             },
             {
-              date: '2022-09-20',
-              date_epoch: 1663632000,
+              date: '2022-09-23',
+              date_epoch: 1663891200,
               day: {
-                maxtemp_c: 32.7,
-                maxtemp_f: 90.9,
-                mintemp_c: 26.1,
-                mintemp_f: 79.0,
-                avgtemp_c: 28.6,
-                avgtemp_f: 83.5,
-                maxwind_mph: 11.9,
-                maxwind_kph: 19.1,
-                totalprecip_mm: 0.9,
-                totalprecip_in: 0.04,
-                avgvis_km: 9.9,
-                avgvis_miles: 6.0,
-                avghumidity: 66.0,
+                maxtemp_c: 14.9,
+                maxtemp_f: 58.8,
+                mintemp_c: 7.2,
+                mintemp_f: 45.0,
+                avgtemp_c: 10.7,
+                avgtemp_f: 51.2,
+                maxwind_mph: 10.3,
+                maxwind_kph: 16.6,
+                totalprecip_mm: 1.5,
+                totalprecip_in: 0.06,
+                avgvis_km: 8.3,
+                avgvis_miles: 5.0,
+                avghumidity: 84.0,
                 daily_will_it_rain: 1,
-                daily_chance_of_rain: 89,
+                daily_chance_of_rain: 87,
                 daily_will_it_snow: 0,
                 daily_chance_of_snow: 0,
                 condition: {
@@ -85,7 +85,7 @@ describe('Test App Component', () => {
                   icon: '//cdn.weatherapi.com/weather/64x64/day/176.png',
                   code: 1063,
                 },
-                uv: 6.0,
+                uv: 3.0,
               },
             },
           ],
@@ -100,14 +100,14 @@ describe('Test App Component', () => {
 
   test(`Forecast api should be called after component's render`, async () => {
     (axios.get as jest.Mock).mockReturnValue(Promise.resolve(response));
-    await fetchWeatherForecast('Jakarta', fetchWeatherForecastCallbackMock);
+    await fetchWeatherForecast('Dublin', fetchWeatherForecastCallbackMock);
     expect(axios.get).toBeCalledTimes(1);
   });
   test(`Placeholder's value of an input in the search section should be correct`, async () => {
     render(<App />);
     (axios.get as jest.Mock).mockReturnValue(Promise.resolve(response));
-    await fetchWeatherForecast('Jakarta', fetchWeatherForecastCallbackMock);
-    expect(screen.getByTestId('search-input').getAttribute('placeholder')).toBe('Jakarta');
+    await fetchWeatherForecast('Dublin', fetchWeatherForecastCallbackMock);
+    expect(screen.getByTestId('search-input').getAttribute('placeholder')).toBe('Dublin');
   });
   test('Input value in the search section should be correct after onchange', () => {
     render(<App />);
@@ -117,7 +117,7 @@ describe('Test App Component', () => {
   });
   test('selling sections should be rendered after successful api request', async () => {
     (axios.get as jest.Mock).mockReturnValue(Promise.resolve(response));
-    await fetchWeatherForecast('Jakarta', fetchWeatherForecastCallbackMock);
+    await fetchWeatherForecast('Dublin', fetchWeatherForecastCallbackMock);
     render(<App />);
     const sellingSections = await screen.findAllByTestId('selling-day-info');
     expect(sellingSections).not.toBeNull();
